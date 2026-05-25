@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الخدمات السريعة</title>
+    <style>
+        /* CSS نقي وبسيط جداً لتقليل استهلاك الذاكرة */
+        :root { --bg: #111827; --card: #1f2937; --text: #f3f4f6; --accent: #2563eb; }
+        body { margin: 0; background: var(--bg); color: var(--text); font-family: sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; overflow: hidden; }
+        .card { background: var(--card); width: 90%; max-width: 400px; padding: 2rem; border-radius: 1rem; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        .btn { background: var(--accent); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 0.5rem; font-weight: bold; cursor: pointer; width: 100%; transition: 0.2s; }
+        .btn:active { transform: scale(0.98); }
+        .hidden { display: none; }
+        .timer { font-size: 4rem; font-weight: 900; margin: 1rem 0; }
+        .ad-slot { background: rgba(255,255,255,0.05); border: 1px dashed #4b5563; margin: 1rem 0; padding: 1rem; font-size: 0.7rem; color: #9ca3af; border-radius: 0.5rem; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="ad-slot">مساحة إعلانية</div>
+
+        <div id="p1">
+            <h2 style="color: #60a5fa;">مرحباً بك</h2>
+            <p style="font-size: 0.9rem; color: #9ca3af;">اضغط للانتقال للرابط الرسمي</p>
+            <button class="btn" onclick="go()">انتقل الآن</button>
+        </div>
+
+        <div id="p2" class="hidden">
+            <h2 style="color: #fbbf24;">لحظة واحدة...</h2>
+            <div id="t" class="timer">5</div>
+            <p style="font-size: 0.8rem; color: #9ca3af;">جاري تحويلك تلقائياً</p>
+        </div>
+
+        <div class="ad-slot">مساحة إعلانية</div>
+    </div>
+
+    <script>
+        // استخدام متغيرات ثابتة لتقليل العمليات على الذاكرة
+        const d = document;
+        const s1 = d.getElementById('p1');
+        const s2 = d.getElementById('p2');
+        const tm = d.getElementById('t');
+
+        function go() {
+            s1.style.display = 'none';
+            s2.style.display = 'block';
+            let c = 5;
+            
+            const i = setInterval(() => {
+                c--;
+                tm.textContent = c;
+                if (c <= 0) {
+                    clearInterval(i);
+                    // استبدل الرابط هنا
+                    location.replace("https://www.google.com");
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
